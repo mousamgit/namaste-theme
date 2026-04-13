@@ -1,0 +1,163 @@
+{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .cta-ribbon-strip-{{ section.id }} {
+    --strip-edge: max(1.5rem, 1vw);
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: var(--strip-edge);
+    padding-right: var(--strip-edge);
+    box-sizing: border-box;
+  }
+
+  .cta-ribbon-inner-{{ section.id }} {
+    max-width: 46rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-ribbon-heading-{{ section.id }} {
+    margin: 0 0 0.85rem;
+    font-family: inherit;
+    font-size: clamp(1.05rem, 2.6vw, 1.55rem);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
+  .cta-ribbon-sub-{{ section.id }} {
+    margin: 0 0 2.25rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .cta-ribbon-inner-{{ section.id }} .button.cta-ribbon-btn-{{ section.id }} {
+    padding: 1.05rem 2.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    min-width: min(100%, 18rem);
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient isolate">
+  <div class="cta-ribbon-strip-{{ section.id }} section-{{ section.id }}-padding">
+    <div class="cta-ribbon-inner-{{ section.id }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="cta-ribbon-heading-{{ section.id }} inline-richtext">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="cta-ribbon-sub-{{ section.id }} rte">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          class="button cta-ribbon-btn-{{ section.id }}{% if section.settings.button_style_secondary %} button--secondary{% endif %}"
+          {% if section.settings.button_link == blank %}
+            role="link"
+            aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "CTA ribbon",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready to find your perfect piece?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Subtext",
+      "default": "<p>Browse our full collection of fine gold jewellery.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "View all gold jewellery"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "CTA ribbon"
+    }
+  ]
+}
+{% endschema %}

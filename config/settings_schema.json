@@ -1356,6 +1356,37 @@
         "id": "social_vimeo_link",
         "label": "t:settings_schema.social-media.settings.social_vimeo_link.label",
         "placeholder": "t:settings_schema.social-media.settings.social_vimeo_link.info"
+      },
+      {
+        "type": "header",
+        "content": "WhatsApp chat (footer corner)"
+      },
+      {
+        "type": "checkbox",
+        "id": "whatsapp_chat_enable",
+        "default": true,
+        "label": "Show WhatsApp button",
+        "info": "Fixed to the lower-right on pages that use the footer. Enter your WhatsApp number below (with country code, digits only)."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_chat_number",
+        "label": "WhatsApp number",
+        "placeholder": "61430301813",
+        "info": "Digits only, with country code (no + or spaces). Example: Australian mobile 04xx xxx xxx → 614xxxxxxxx."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_chat_message",
+        "label": "Pre-filled message",
+        "default": "Hello! I have a question about your jewellery.",
+        "info": "Opens in the customer’s WhatsApp chat when they start a conversation."
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_chat_heading",
+        "label": "Chat panel title",
+        "default": "Message us on WhatsApp"
       }
     ]
   },

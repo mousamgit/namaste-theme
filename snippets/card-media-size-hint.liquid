@@ -1,0 +1,25 @@
+{% comment %}
+  Minimal “no image” tile: one line like 400*400 (asterisk = ×).
+
+  Sizes follow the theme’s dense 6-up product strip:
+  - Inner rail ≈ 100vw − 2×max(1.5rem, 1vw); each cell ≈ (inner − 5×12px gap) / 6.
+  - At ~1200px wide viewport that is ~180–190px wide per cell → use ≥400px wide file for ~2× sharpness.
+  - Shown string is a practical minimum upload size, not the exact CSS pixel width (that changes with screen).
+{% endcomment %}
+{%- liquid
+  assign a = aspect | default: 'square' | strip | downcase
+  assign px = '400*400'
+  if a == 'portrait'
+    assign px = '360*450'
+  elsif a == 'adapt'
+    assign px = '1080*1350'
+  endif
+  assign px_spoken = px | replace: '*', ' by '
+-%}
+<div
+  class="card__media-size-hint"
+  role="img"
+  aria-label="{{ 'products.product.image_size_guide' | t: size: px_spoken | escape }}"
+>
+  <span class="card__media-size-hint__pixels" aria-hidden="true">{{ px }}</span>
+</div>

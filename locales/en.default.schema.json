@@ -2545,7 +2545,7 @@
         "button_label": {
           "label": "Label",
           "default": "Button label",
-          "info": "Leave blank to hide"
+          "info": "With “Caption band on image”, this becomes the black top-right link (like product strips). Otherwise it is the centered button below the columns. Leave blank to hide."
         },
         "button_link": {
           "label": "Link"

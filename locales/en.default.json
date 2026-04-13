@@ -87,7 +87,8 @@
     "total_reviews": "total reviews",
     "star_reviews_info": "{{ rating_value }} out of {{ rating_max }} stars",
     "collapsible_content_title": "Collapsible content",
-    "complementary_products": "Complementary products"
+    "complementary_products": "Complementary products",
+    "whatsapp_open": "Open WhatsApp chat"
   },
   "blogs": {
     "article": {
@@ -182,6 +183,7 @@
       "value_unavailable": "{{ option_value }} - Unavailable",
       "variant_sold_out_or_unavailable": "Variant sold out or unavailable",
       "video_exit_message": "{{ title }} opens full screen video in same window.",
+      "image_size_guide": "No product image. Use at least {{ size }} pixels for a sharp photo in this grid.",
       "view_full_details": "View full details",
       "xr_button": "View in your space",
       "xr_button_label": "View in your space, loads item in augmented reality window",
@@ -338,6 +340,15 @@
     },
     "collection_list": {
       "view_all": "View all"
+    },
+    "home_collection_tabs": {
+      "no_products": "No products"
+    },
+    "collection_grid_row": {
+      "price_caption": "Price"
+    },
+    "multicolumn": {
+      "circle_placeholder_a11y": "Placeholder circle: about 200 by 200 pixels on screen in this row. Use a square image of at least 400 by 400 pixels for a sharp photo."
     },
     "collection_template": {
       "empty": "No products found",

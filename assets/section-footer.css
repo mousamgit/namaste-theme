@@ -506,3 +506,140 @@
     }
   }
 }
+
+/* Namaste footer: match homepage strip typography (featured / collection rows) */
+.footer--namaste-rb .footer__content-top {
+  padding-bottom: 2rem;
+}
+
+/* Column titles — same as .fc-strip-head__title (SILVER COLLECTION, EXPLORE MORE, etc.) */
+.footer--namaste-rb .footer-block__heading {
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  font-family: inherit;
+  font-size: 1.9rem !important;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.footer--namaste-rb .footer-block--menu .list-menu__item,
+.footer--namaste-rb .footer-block--menu .list-menu__item--link {
+  font-family: inherit;
+  font-size: calc(var(--font-body-scale) * 1.35rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.footer--namaste-rb .footer-block--text-rte .footer-block__details-content.rte,
+.footer--namaste-rb .footer-block--text-rte .footer-block__details-content.rte p {
+  margin: 0;
+  line-height: 1.65;
+  font-size: calc(var(--font-body-scale) * 1.35rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.footer--namaste-rb .footer-block--text-rte .footer-block__details-content.rte p + p {
+  margin-top: 0.65rem;
+}
+
+/* Contact labels — same cadence as strip “View all” pills (fc-strip-va) */
+.footer--namaste-rb .footer-block--text-rte .footer-block__details-content.rte strong {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.35rem;
+  margin-top: 0.85rem;
+}
+
+.footer--namaste-rb .footer-block--text-rte .footer-block__details-content.rte p:first-child strong {
+  margin-top: 0;
+}
+
+.footer--namaste-rb .footer__newsletter .field__label,
+.footer--namaste-rb .footer__newsletter .field__input {
+  font-size: calc(var(--font-body-scale) * 1.3rem);
+  letter-spacing: 0.02em;
+}
+
+.footer--namaste-rb .footer__newsletter.newsletter-form {
+  align-items: stretch;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .footer--namaste-rb .footer__newsletter.newsletter-form {
+    margin: 0;
+    max-width: 100%;
+  }
+}
+
+.footer--namaste-rb .footer-block--newsletter-trailing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem 2.5rem;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-top: 2rem;
+  margin-top: 0;
+  border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+  border-bottom: none;
+}
+
+.footer--namaste-rb .footer-block--newsletter-trailing:empty {
+  display: none;
+}
+
+.footer--namaste-rb .footer-block--newsletter-trailing .footer__list-social.list-social {
+  justify-content: center;
+  margin: 0;
+}
+
+.footer--namaste-rb .footer-block--newsletter:not(.footer-block--newsletter-trailing) .footer-block__newsletter .newsletter-form__field-wrapper {
+  max-width: none;
+}
+
+@media screen and (min-width: 750px) {
+  .footer--namaste-rb .footer-block--newsletter:not(.footer-block--newsletter-trailing) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem 3rem;
+  }
+
+  .footer--namaste-rb .footer-block--newsletter:not(.footer-block--newsletter-trailing) .footer-block__newsletter {
+    flex: 1 1 24rem;
+    max-width: 42rem;
+    text-align: left;
+  }
+
+  .footer--namaste-rb .footer-block--newsletter:not(.footer-block--newsletter-trailing) .footer__list-social.list-social {
+    justify-content: flex-end;
+    flex: 0 1 auto;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .footer--namaste-rb .footer-block--newsletter:not(.footer-block--newsletter-trailing) {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer--namaste-rb .footer__list-social .list-social__link {
+    padding: 0.85rem 1rem;
+  }
+}

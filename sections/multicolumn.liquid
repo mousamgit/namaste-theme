@@ -13,6 +13,216 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .section-{{ section.id }}-padding .multicolumn__title .title {
+    margin: 0;
+    font-family: inherit;
+    font-size: 1.05rem !important;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 1.35;
+    text-transform: uppercase;
+  }
+
+  .section-{{ section.id }}-padding .multicolumn__title.title-wrapper-with-link {
+    margin-bottom: 12px;
+  }
+
+  {% if section.settings.caption_over_image %}
+    {% liquid
+      assign mc_desk = section.settings.columns_desktop | plus: 0
+      if mc_desk < 1
+        assign mc_desk = 1
+      endif
+      assign mc_mob = section.settings.columns_mobile | plus: 0
+      if mc_mob < 1
+        assign mc_mob = 1
+      endif
+      assign mc_tab = 3
+      assign mc_gap_desk_px = mc_desk | minus: 1 | times: 8
+      assign mc_gap_tab_px = mc_tab | minus: 1 | times: 8
+      assign mc_gap_mob_px = mc_mob | minus: 1 | times: 8
+    %}
+    @media screen and (max-width: 749px) {
+      .multicolumn--caption-overlay-{{ section.id }} {
+        --mc-explore-circle: calc((100vw - 2 * max(1.5rem, 1vw) - {{ mc_gap_mob_px }}px) / {{ mc_mob }} - 0.35rem);
+      }
+    }
+    @media screen and (min-width: 750px) and (max-width: 989px) {
+      .multicolumn--caption-overlay-{{ section.id }} {
+        --mc-explore-circle: calc((100vw - 2 * max(1.5rem, 1vw) - {{ mc_gap_tab_px }}px) / {{ mc_tab }} - 0.3rem);
+      }
+    }
+    @media screen and (min-width: 990px) {
+      .multicolumn--caption-overlay-{{ section.id }} {
+        --mc-explore-circle: min(
+          calc((100vw - 2 * max(1.5rem, 1vw) - {{ mc_gap_desk_px }}px) / {{ mc_desk }} - 0.28rem),
+          calc((min(100vw, 1800px) - 2 * max(1.5rem, 1vw) - {{ mc_gap_desk_px }}px) / {{ mc_desk }} - 0.28rem)
+        );
+      }
+    }
+    .multicolumn-strip-edge-{{ section.id }} {
+      --strip-edge: max(1.5rem, 1vw);
+      width: 100vw;
+      max-width: 100vw;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+      padding-left: var(--strip-edge);
+      padding-right: var(--strip-edge);
+      box-sizing: border-box;
+    }
+    .multicolumn-strip-head-{{ section.id }} {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 1.75rem;
+      text-align: center;
+      width: 100%;
+    }
+    .multicolumn-strip-head-{{ section.id }} .multicolumn-strip-head__title {
+      margin: 0;
+      font-family: inherit;
+      font-size: 1.9rem !important;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      line-height: 1.2 !important;
+      text-transform: uppercase;
+      text-align: center;
+      flex: 0 1 auto;
+      min-width: 0;
+      width: 100%;
+    }
+    .multicolumn-strip-va-{{ section.id }} {
+      flex-shrink: 0;
+      display: inline-block;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background-color: #000;
+      border: 1px solid #000;
+      padding: 0.82rem 1.65rem;
+      line-height: 1;
+      transition: opacity 0.2s ease, background-color 0.2s ease;
+    }
+    .multicolumn-strip-va-{{ section.id }}:hover {
+      background-color: #222;
+      border-color: #222;
+      color: #fff;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-list.grid {
+      --grid-mobile-horizontal-spacing: 0.5rem;
+      --grid-desktop-horizontal-spacing: 0.5rem;
+      --grid-mobile-vertical-spacing: 0.65rem;
+      --grid-desktop-vertical-spacing: 0.55rem;
+      width: 100%;
+      max-width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @media screen and (min-width: 990px) {
+      .multicolumn--caption-overlay-{{ section.id }} .multicolumn-list.grid {
+        flex-wrap: nowrap;
+      }
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-list.grid > .grid__item {
+      flex-grow: 0;
+      flex-shrink: 0;
+      width: var(--mc-explore-circle);
+      max-width: var(--mc-explore-circle);
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card--rb-overlay {
+      position: relative;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card--rb-overlay.content-container::after {
+      display: none;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__hit {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__hit:focus-visible {
+      outline: 0.2rem solid rgba(var(--color-foreground), 0.35);
+      outline-offset: 0.25rem;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__image-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: var(--mc-explore-circle);
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .slider-mobile-gutter {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      overflow-x: visible;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__caption-band {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: auto;
+      bottom: 0;
+      transform: none;
+      z-index: 2;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.35));
+      padding: 0.55rem 0.35rem 0.5rem;
+      pointer-events: none;
+      text-align: center;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__caption-text {
+      display: block;
+      color: #fff;
+      font-size: clamp(0.72rem, 2vmin, 1rem);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__circle-ph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+      border-radius: 50%;
+      box-sizing: border-box;
+      background: rgba(var(--color-foreground), 0.05);
+      border: 1px dashed rgba(var(--color-foreground), 0.2);
+      color: rgba(var(--color-foreground), 0.45);
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__circle-ph__main {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+      font-size: clamp(0.75rem, 3vmin, 1.05rem);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+    .multicolumn--caption-overlay-{{ section.id }} .multicolumn-card__circle-ph__file {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+      font-size: clamp(0.62rem, 2.4vmin, 0.85rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      opacity: 0.75;
+      line-height: 1;
+    }
+  {% endif %}
 {%- endstyle -%}
 
 {%- liquid
@@ -21,26 +231,51 @@
   if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_int
     assign show_mobile_slider = true
   endif
+  if section.settings.caption_over_image
+    assign show_mobile_slider = false
+  endif
+  assign mc_strip = section.settings.caption_over_image
 -%}
 
-<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}">
+<div class="multicolumn color-{{ section.settings.color_scheme }} gradient{% unless section.settings.background_style == 'none' and settings.text_boxes_border_thickness > 0 or settings.text_boxes_shadow_opacity > 0 %} background-{{ section.settings.background_style }}{% endunless %}{% if section.settings.title == blank %} no-heading{% endif %}{% if section.settings.caption_over_image %} multicolumn--caption-overlay-{{ section.id }}{% endif %}">
   <div
-    class="page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    class="{% if mc_strip %}multicolumn-strip-edge-{{ section.id }} {% else %}page-width {% endif %}section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     {% if settings.animations_reveal_on_scroll %}
       data-cascade
     {% endif %}
   >
     {%- unless section.settings.title == blank -%}
-      <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title">
-        <h2 class="title inline-richtext {{ section.settings.heading_size }}">
-          {{ section.settings.title }}
-        </h2>
-        {%- if section.settings.button_label != blank and show_mobile_slider -%}
-          <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">
-            {{- section.settings.button_label | escape -}}
-          </a>
-        {%- endif -%}
-      </div>
+      {%- if mc_strip -%}
+        <div class="multicolumn-strip-head-{{ section.id }}">
+          <h2 class="title multicolumn-strip-head__title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.title }}
+          </h2>
+          {%- if section.settings.button_label != blank -%}
+            <a
+              class="multicolumn-strip-va-{{ section.id }}"
+              {% if section.settings.button_link == blank %}
+                role="link"
+                aria-disabled="true"
+              {% else %}
+                href="{{ section.settings.button_link }}"
+              {% endif %}
+            >
+              {{- section.settings.button_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin multicolumn__title">
+          <h2 class="title inline-richtext {{ section.settings.heading_size }}">
+            {{ section.settings.title }}
+          </h2>
+          {%- if section.settings.button_label != blank and show_mobile_slider -%}
+            <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">
+              {{- section.settings.button_label | escape -}}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
     {%- endunless -%}
     <slider-component class="slider-mobile-gutter">
       <ul
@@ -51,7 +286,7 @@
         {%- liquid
           assign highest_ratio = 0
           for block in section.blocks
-            if block.settings.image.aspect_ratio > highest_ratio
+            if block.settings.image != blank and block.settings.image.aspect_ratio > highest_ratio
               assign highest_ratio = block.settings.image.aspect_ratio
             endif
           endfor
@@ -75,12 +310,30 @@
               style="--animation-order: {{ forloop.index }};"
             {% endif %}
           >
-            <div class="multicolumn-card content-container">
+            {%- liquid
+              assign coi = section.settings.caption_over_image
+              assign column_url = block.settings.link
+              if block.settings.collection != blank
+                assign column_url = block.settings.collection.url
+              endif
+              assign show_overlay = false
+              if coi and block.settings.title != blank
+                assign show_overlay = true
+              endif
+              assign hide_title_in_info = false
+              if show_overlay
+                assign hide_title_in_info = true
+              endif
+            -%}
+            <div class="multicolumn-card content-container{% if show_overlay %} multicolumn-card--rb-overlay{% endif %}">
               {%- if block.settings.image != blank -%}
                 {% if section.settings.image_ratio == 'adapt' or section.settings.image_ratio == 'circle' %}
                   {% assign spaced_image = true %}
                 {% endif %}
-                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %} multicolumn-card-spacing{% endif %}">
+                {%- if show_overlay and column_url != blank -%}
+                  <a class="multicolumn-card__hit" href="{{ column_url }}">
+                {%- endif -%}
+                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %}{% unless coi %} multicolumn-card-spacing{% endunless %}{% endif %}">
                   <div
                     class="media media--transparent media--{{ section.settings.image_ratio }}"
                     {% if section.settings.image_ratio == 'adapt' %}
@@ -116,31 +369,66 @@
                         class: 'multicolumn-card__image'
                     }}
                   </div>
+                  {%- if show_overlay -%}
+                    <div class="multicolumn-card__caption-band">
+                      <span class="multicolumn-card__caption-text">{{- block.settings.title -}}</span>
+                    </div>
+                  {%- endif -%}
                 </div>
-              {%- endif -%}
-              <div class="multicolumn-card__info">
-                {%- if block.settings.title != blank -%}
-                  <h3 class="inline-richtext">{{ block.settings.title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.text != blank -%}
-                  <div class="rte">{{ block.settings.text }}</div>
-                {%- endif -%}
-                {%- if block.settings.link_label != blank -%}
-                  <a
-                    class="link animate-arrow"
-                    {% if block.settings.link == blank %}
-                      role="link" aria-disabled="true"
-                    {% else %}
-                      href="{{ block.settings.link }}"
-                    {% endif %}
-                  >
-                    {{- block.settings.link_label | escape -}}
-                    <span class="svg-wrapper"
-                      ><span class="icon-wrap">&nbsp;{{ 'icon-arrow.svg' | inline_asset_content }}</span></span
-                    >
+                {%- if show_overlay and column_url != blank -%}
                   </a>
                 {%- endif -%}
-              </div>
+              {%- elsif coi and block.settings.title != blank -%}
+                {% assign spaced_image = true %}
+                {%- if show_overlay and column_url != blank -%}
+                  <a class="multicolumn-card__hit" href="{{ column_url }}">
+                {%- endif -%}
+                <div class="multicolumn-card__image-wrapper multicolumn-card__image-wrapper--{{ section.settings.image_width }}-width{% if section.settings.image_width != 'full' or spaced_image %}{% unless coi %} multicolumn-card-spacing{% endunless %}{% endif %}">
+                  <div class="media media--transparent media--circle">
+                    <div
+                      class="multicolumn-card__circle-ph"
+                      role="img"
+                      aria-label="{{ 'sections.multicolumn.circle_placeholder_a11y' | t | escape }}"
+                    >
+                      <span class="multicolumn-card__circle-ph__main" aria-hidden="true">200*200</span>
+                      <span class="multicolumn-card__circle-ph__file" aria-hidden="true">400*400</span>
+                    </div>
+                  </div>
+                  {%- if show_overlay -%}
+                    <div class="multicolumn-card__caption-band">
+                      <span class="multicolumn-card__caption-text">{{- block.settings.title -}}</span>
+                    </div>
+                  {%- endif -%}
+                </div>
+                {%- if show_overlay and column_url != blank -%}
+                  </a>
+                {%- endif -%}
+              {%- endif -%}
+              {%- if block.settings.text != blank or block.settings.link_label != blank or hide_title_in_info == false -%}
+                <div class="multicolumn-card__info">
+                  {%- if block.settings.title != blank and hide_title_in_info == false -%}
+                    <h3 class="inline-richtext">{{ block.settings.title }}</h3>
+                  {%- endif -%}
+                  {%- if block.settings.text != blank -%}
+                    <div class="rte">{{ block.settings.text }}</div>
+                  {%- endif -%}
+                  {%- if block.settings.link_label != blank -%}
+                    <a
+                      class="link animate-arrow"
+                      {% if column_url == blank %}
+                        role="link" aria-disabled="true"
+                      {% else %}
+                        href="{{ column_url }}"
+                      {% endif %}
+                    >
+                      {{- block.settings.link_label | escape -}}
+                      <span class="svg-wrapper"
+                        ><span class="icon-wrap">&nbsp;{{ 'icon-arrow.svg' | inline_asset_content }}</span></span
+                      >
+                    </a>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
             </div>
           </li>
         {%- endfor -%}
@@ -173,20 +461,22 @@
         </div>
       {%- endif -%}
     </slider-component>
-    <div class="center{% if show_mobile_slider %} small-hide medium-hide{% endif %}">
-      {%- if section.settings.button_label != blank -%}
-        <a
-          class="button button--primary"
-          {% if section.settings.button_link == blank %}
-            role="link" aria-disabled="true"
-          {% else %}
-            href="{{ section.settings.button_link }}"
-          {% endif %}
-        >
-          {{ section.settings.button_label | escape }}
-        </a>
-      {%- endif -%}
-    </div>
+    {%- unless mc_strip -%}
+      <div class="center{% if show_mobile_slider %} small-hide medium-hide{% endif %}">
+        {%- if section.settings.button_label != blank -%}
+          <a
+            class="button button--primary"
+            {% if section.settings.button_link == blank %}
+              role="link" aria-disabled="true"
+            {% else %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endunless -%}
   </div>
 </div>
 
@@ -282,6 +572,13 @@
       "label": "t:sections.multicolumn.settings.image_ratio.label"
     },
     {
+      "type": "checkbox",
+      "id": "caption_over_image",
+      "default": false,
+      "label": "Caption band on image (explore style)",
+      "info": "Title on a dark band across the image; same side padding as product strips. Use circle ratio, collections, and 5 columns. Empty image shows a round size placeholder until you upload."
+    },
+    {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_button.content"
     },    
@@ -289,7 +586,7 @@
       "type": "text",
       "id": "button_label",
       "default": "t:sections.multicolumn.settings.button_label.default",
-      "label": "t:sections.multicolumn.settings.button_label.label", 
+      "label": "t:sections.multicolumn.settings.button_label.label",
       "info": "t:sections.multicolumn.settings.button_label.info"
     },
     {
@@ -431,6 +728,12 @@
           "type": "url",
           "id": "link",
           "label": "t:sections.multicolumn.blocks.column.settings.link.label"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "If set, this collection opens when the circle (or caption band) is clicked. Overrides the link URL when both are set."
         }
       ]
     }

@@ -9,105 +9,252 @@
  */
 {
   "sections": {
-    "rich_text": {
-      "type": "rich-text",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 28,
-        "padding_bottom": 12
-      }
-    },
-    "image_banner_w8mcCP": {
+    "image_banner_hero": {
       "type": "image-banner",
       "blocks": {
-        "heading_j74f3a": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Timeless Nepali Ornaments for Every Occasion</strong>",
-            "heading_size": "h1"
-          }
-        },
-        "text_LizrWc": {
-          "type": "text",
-          "settings": {
-            "text": "<strong>Timeless designs crafted with tradition and elegance</strong>",
-            "text_style": "body"
-          }
-        },
-        "buttons_e6KKJ7": {
+        "hero_buttons": {
           "type": "buttons",
           "settings": {
             "button_label_1": "Shop now",
             "button_link_1": "shopify://collections/all",
             "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
+            "button_label_2": "Explore more",
+            "button_link_2": "shopify://collections/all",
             "button_style_secondary_2": true
           }
         }
       },
-      "block_order": [
-        "heading_j74f3a",
-        "text_LizrWc",
-        "buttons_e6KKJ7"
-      ],
-      "name": "t:sections.image-banner.presets.name",
+      "block_order": ["hero_buttons"],
       "settings": {
+        "compact_hero_cta_row": true,
         "image": "shopify://shop_images/jewelry-natural-4.jpg",
-        "image_overlay_opacity": 0,
-        "image_height": "medium",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
         "image_behavior": "none",
-        "desktop_content_position": "middle-center",
+        "desktop_content_position": "bottom-center",
         "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "scheme-4",
         "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "show_text_below": true
+        "show_text_below": false
       }
     },
-    "featured_collection_FNcy4F": {
+    "home_collection_tabs_rb": {
+      "type": "home-collection-tabs",
+      "settings": {
+        "tabs_aria_label": "Featured products",
+        "tab_label_1": "New arrivals",
+        "collection_1": "featured-collection",
+        "tab_label_2": "Most loved",
+        "tab_label_3": "Unique",
+        "max_products": 24,
+        "view_all_label": "View all",
+        "color_scheme": "scheme-1",
+        "padding_top": 24,
+        "padding_bottom": 20
+      }
+    },
+    "featured_spotlight": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.presets.name",
       "settings": {
-        "title": "New Arrivals",
+        "title": "GOLD MANGALSUTRA",
+        "products_to_show": 6,
+        "view_all_label": "View all",
         "collection": "featured-collection",
-        "heading_size": "h1",
+        "heading_size": "h2",
         "image_ratio": "square",
-        "padding_top": 4,
-        "padding_bottom": 0
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "color_scheme": "scheme-1"
       }
     },
-    "collection_list_efKCxX": {
+    "collection_silver_row": {
       "type": "collection-list",
-      "custom_css": [
-        "/* Adjust gap between collection items */.collection-list {gap: 16px; /* Change this value to increase/decrease spacing */}",
-        " /* Make collection cards perfect squares */.collection-list__item .card__media,.collection-list__item .media {padding-bottom: 100% !important; height: 0; position: relative; overflow: hidden;}",
-        ".collection-list__item .card__media img,.collection-list__item .media img {position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}"
-      ],
-      "name": "t:sections.collection-list.presets.name",
       "settings": {
-        "title": "our collections",
+        "title": "SILVER COLLECTION",
+        "products_to_show": 6,
+        "view_all_label": "View all",
         "collection": "featured-collection",
-        "heading_size": "h1",
-        "image_ratio": "adapt",
-        "padding_top": 0,
-        "padding_bottom": 0
+        "heading_size": "h2",
+        "image_ratio": "square",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "color_scheme": "scheme-1"
       }
     },
-    "17753472878ad07fd4": {
-      "type": "_blocks",
-      "settings": {}
+    "multicolumn_explore": {
+      "type": "multicolumn",
+      "blocks": {
+        "col_ring": {
+          "type": "column",
+          "settings": {
+            "title": "RINGS",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        },
+        "col_pendant": {
+          "type": "column",
+          "settings": {
+            "title": "PENDANTS",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        },
+        "col_earring": {
+          "type": "column",
+          "settings": {
+            "title": "EARRINGS",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        },
+        "col_necklace": {
+          "type": "column",
+          "settings": {
+            "title": "NECKLACES",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        },
+        "col_bracelet": {
+          "type": "column",
+          "settings": {
+            "title": "BRACELETS",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        },
+        "col_chains": {
+          "type": "column",
+          "settings": {
+            "title": "CHAINS",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "collection": "all"
+          }
+        }
+      },
+      "block_order": [
+        "col_ring",
+        "col_pendant",
+        "col_earring",
+        "col_necklace",
+        "col_bracelet",
+        "col_chains"
+      ],
+      "settings": {
+        "title": "EXPLORE MORE",
+        "heading_size": "h2",
+        "image_width": "full",
+        "image_ratio": "circle",
+        "caption_over_image": true,
+        "columns_desktop": 6,
+        "column_alignment": "center",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "collapsible_faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Q1. How long has Namaste Jewellers been in the jewellery business?",
+            "icon": "plus",
+            "row_content": "<p>Replace this answer with your story, heritage, and years of experience.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Q2. Are your gold pieces certified for purity?",
+            "icon": "plus",
+            "row_content": "<p>Describe hallmarking, BIS or other certification, and what customers receive with each purchase.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Q3. Do you offer custom-made jewellery?",
+            "icon": "plus",
+            "row_content": "<p>Explain bespoke design, consultations, timelines, and how to start an order.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Q4. Can I shop online from Namaste Jewellers?",
+            "icon": "plus",
+            "row_content": "<p>Outline how online orders, delivery, store pickup, or appointments work.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Q5. Do you provide warranty or after-sales services?",
+            "icon": "plus",
+            "row_content": "<p>Cover cleaning, resizing, repairs, exchange policy, and warranty terms.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "caption": "",
+        "heading": "FAQs",
+        "heading_size": "h2",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "match_explore_typography": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "cta_gold_ribbon": {
+      "type": "cta-ribbon",
+      "settings": {
+        "heading": "READY TO FIND YOUR PERFECT PIECE?",
+        "text": "<p>Shop our full range of fine gold jewellery online or visit the boutique.</p>",
+        "button_label": "ALL GOLD JEWELLERY",
+        "button_link": "shopify://collections/all",
+        "button_style_secondary": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
-    "rich_text",
-    "image_banner_w8mcCP",
-    "featured_collection_FNcy4F",
-    "collection_list_efKCxX",
-    "17753472878ad07fd4"
+    "image_banner_hero",
+    "home_collection_tabs_rb",
+    "featured_spotlight",
+    "collection_silver_row",
+    "multicolumn_explore",
+    "collapsible_faq",
+    "cta_gold_ribbon"
   ]
 }

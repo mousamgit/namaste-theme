@@ -1,0 +1,480 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign c1 = section.settings.collection_1
+  assign c2 = section.settings.collection_2
+  assign c3 = section.settings.collection_3
+  assign max_products = section.settings.max_products | default: 24
+  if max_products < 6
+    assign max_products = 6
+  endif
+  assign view_threshold = 6
+  assign view_lbl = section.settings.view_all_label
+  if view_lbl == blank
+    assign view_lbl = 'sections.featured_collection.view_all' | t
+  endif
+-%}
+
+{%- style -%}
+  .home-tabs-{{ section.id }} {
+    --strip-stack-gap: 20px;
+    --strip-edge: max(1.5rem, 1vw);
+  }
+
+  .home-tabs-{{ section.id }}__edge {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: var(--strip-edge);
+    padding-right: var(--strip-edge);
+    box-sizing: border-box;
+  }
+  .section-{{ section.id }}-pad-v {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-pad-v {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .home-tabs-{{ section.id }}__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 2.5rem;
+    margin-bottom: var(--strip-stack-gap);
+    padding-bottom: 0;
+  }
+
+  .home-tabs-{{ section.id }}__tab {
+    appearance: none;
+    background: none;
+    border: none;
+    padding: 0.35rem 0;
+    margin: 0;
+    font: inherit;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground));
+    opacity: 0.45;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .home-tabs-{{ section.id }}__tab:hover {
+    opacity: 0.75;
+  }
+
+  .home-tabs-{{ section.id }}__tab.is-active {
+    opacity: 1;
+    background: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    padding: 0.45rem 1.35rem;
+    border-radius: 999px;
+  }
+
+  .home-tabs-{{ section.id }}__rail {
+    --ht-gap: 12px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .home-tabs-{{ section.id }}__slider {
+    --ht-gap: 12px;
+    display: flex;
+    gap: var(--ht-gap);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding: 0 0 0.5rem;
+    margin: 0;
+    list-style: none;
+    max-width: 100%;
+  }
+
+  .home-tabs-{{ section.id }}__slider::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  .home-tabs-{{ section.id }}__slider .grid__item {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Six per row inside padded rail; width % = slider inner width */
+  @media screen and (min-width: 1200px) {
+    .home-tabs-{{ section.id }}__slider .grid__item {
+      flex: 0 0 calc((100% - 5 * var(--ht-gap)) / 6);
+      width: calc((100% - 5 * var(--ht-gap)) / 6);
+      max-width: calc((100% - 5 * var(--ht-gap)) / 6);
+    }
+  }
+
+  @media screen and (min-width: 990px) and (max-width: 1199px) {
+    .home-tabs-{{ section.id }}__slider .grid__item {
+      flex: 0 0 calc((100% - 3 * var(--ht-gap)) / 4);
+      width: calc((100% - 3 * var(--ht-gap)) / 4);
+      max-width: calc((100% - 3 * var(--ht-gap)) / 4);
+    }
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    .home-tabs-{{ section.id }}__slider .grid__item {
+      flex: 0 0 calc((100% - 2 * var(--ht-gap)) / 3);
+      width: calc((100% - 2 * var(--ht-gap)) / 3);
+      max-width: calc((100% - 2 * var(--ht-gap)) / 3);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .home-tabs-{{ section.id }}__slider .grid__item {
+      flex: 0 0 calc((100% - var(--ht-gap)) / 2);
+      width: calc((100% - var(--ht-gap)) / 2);
+      max-width: calc((100% - var(--ht-gap)) / 2);
+      min-width: 42%;
+    }
+  }
+
+  .home-tabs-{{ section.id }}__slider .grid__item > * {
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-tabs-{{ section.id }}__slider .card__media {
+    width: 100%;
+    height: 100%;
+  }
+
+  .home-tabs-{{ section.id }}__slider .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (min-width: 990px) {
+    .home-tabs-{{ section.id }}__slider .card:hover .media.media--hover-effect > img:first-child:only-child,
+    .home-tabs-{{ section.id }}__slider .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child {
+      transform: none !important;
+    }
+    .home-tabs-{{ section.id }}__slider .card-wrapper:hover .media.media--hover-effect > img + img {
+      transform: none !important;
+    }
+  }
+
+  .home-tabs-{{ section.id }}__empty {
+    margin: 2rem auto;
+    padding: 0;
+    text-align: center;
+  }
+
+  .home-tabs-{{ section.id }}__footer {
+    margin-top: var(--strip-stack-gap);
+    text-align: center;
+    padding: 0 0 0.25rem;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-pad-v">
+    <div
+      class="home-tabs-{{ section.id }}"
+      id="HomeTabsRoot-{{ section.id }}"
+    >
+      <div class="home-tabs-{{ section.id }}__edge">
+        <div
+          class="home-tabs-{{ section.id }}__nav"
+          role="tablist"
+          aria-label="{{ section.settings.tabs_aria_label | escape }}"
+        >
+          <button
+            type="button"
+            role="tab"
+            class="home-tabs-{{ section.id }}__tab is-active"
+            aria-selected="true"
+            data-home-tab="1"
+            data-home-tabs="{{ section.id }}"
+          >
+            {{ section.settings.tab_label_1 | escape }}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="home-tabs-{{ section.id }}__tab"
+            aria-selected="false"
+            data-home-tab="2"
+            data-home-tabs="{{ section.id }}"
+          >
+            {{ section.settings.tab_label_2 | escape }}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            class="home-tabs-{{ section.id }}__tab"
+            aria-selected="false"
+            data-home-tab="3"
+            data-home-tabs="{{ section.id }}"
+          >
+            {{ section.settings.tab_label_3 | escape }}
+          </button>
+        </div>
+
+      <div class="home-tabs-{{ section.id }}__rail">
+        <div
+          class="home-tabs-{{ section.id }}__panel"
+          role="tabpanel"
+          data-home-panel="1"
+          data-home-tabs="{{ section.id }}"
+          id="HomeTabsPanel-1-{{ section.id }}"
+        >
+          {%- if c1 == blank -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- elsif c1.products.size == 0 -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- else -%}
+            <ul class="home-tabs-{{ section.id }}__slider product-grid" role="list">
+              {%- for product in c1.products limit: max_products -%}
+                <li class="grid__item">
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: 'square',
+                    show_secondary_image: true,
+                    section_id: section.id
+                  %}
+                </li>
+              {%- endfor -%}
+            </ul>
+            {%- if c1.all_products_count > view_threshold -%}
+              <div class="home-tabs-{{ section.id }}__footer">
+                <a href="{{ c1.url }}" class="button button--secondary">
+                  {{- view_lbl | escape -}}
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        <div
+          class="home-tabs-{{ section.id }}__panel"
+          role="tabpanel"
+          data-home-panel="2"
+          data-home-tabs="{{ section.id }}"
+          id="HomeTabsPanel-2-{{ section.id }}"
+          hidden
+        >
+          {%- if c2 == blank -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- elsif c2.products.size == 0 -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- else -%}
+            <ul class="home-tabs-{{ section.id }}__slider product-grid" role="list">
+              {%- for product in c2.products limit: max_products -%}
+                <li class="grid__item">
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: 'square',
+                    show_secondary_image: true,
+                    section_id: section.id
+                  %}
+                </li>
+              {%- endfor -%}
+            </ul>
+            {%- if c2.all_products_count > view_threshold -%}
+              <div class="home-tabs-{{ section.id }}__footer">
+                <a href="{{ c2.url }}" class="button button--secondary">
+                  {{- view_lbl | escape -}}
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+
+        <div
+          class="home-tabs-{{ section.id }}__panel"
+          role="tabpanel"
+          data-home-panel="3"
+          data-home-tabs="{{ section.id }}"
+          id="HomeTabsPanel-3-{{ section.id }}"
+          hidden
+        >
+          {%- if c3 == blank -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- elsif c3.products.size == 0 -%}
+            <p class="home-tabs-{{ section.id }}__empty">{{ 'sections.home_collection_tabs.no_products' | t }}</p>
+          {%- else -%}
+            <ul class="home-tabs-{{ section.id }}__slider product-grid" role="list">
+              {%- for product in c3.products limit: max_products -%}
+                <li class="grid__item">
+                  {% render 'card-product',
+                    card_product: product,
+                    media_aspect_ratio: 'square',
+                    show_secondary_image: true,
+                    section_id: section.id
+                  %}
+                </li>
+              {%- endfor -%}
+            </ul>
+            {%- if c3.all_products_count > view_threshold -%}
+              <div class="home-tabs-{{ section.id }}__footer">
+                <a href="{{ c3.url }}" class="button button--secondary">
+                  {{- view_lbl | escape -}}
+                </a>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var sid = '{{ section.id }}';
+    function init() {
+      var root = document.getElementById('HomeTabsRoot-' + sid);
+      if (!root) return;
+      var tabs = root.querySelectorAll('[data-home-tab][data-home-tabs="' + sid + '"]');
+      var panels = root.querySelectorAll('[data-home-panel][data-home-tabs="' + sid + '"]');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var n = tab.getAttribute('data-home-tab');
+          tabs.forEach(function (t) {
+            var on = t === tab;
+            t.classList.toggle('is-active', on);
+            t.setAttribute('aria-selected', on ? 'true' : 'false');
+          });
+          panels.forEach(function (p) {
+            var match = p.getAttribute('data-home-panel') === n;
+            if (match) {
+              p.removeAttribute('hidden');
+            } else {
+              p.setAttribute('hidden', '');
+            }
+          });
+        });
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail.sectionId === sid) init();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Home collection tabs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tabs_aria_label",
+      "label": "Tabs accessibility label",
+      "default": "Product collections"
+    },
+    {
+      "type": "text",
+      "id": "tab_label_1",
+      "label": "Tab 1 label",
+      "default": "New arrivals"
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Tab 1 collection"
+    },
+    {
+      "type": "text",
+      "id": "tab_label_2",
+      "label": "Tab 2 label",
+      "default": "Most loved"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Tab 2 collection"
+    },
+    {
+      "type": "text",
+      "id": "tab_label_3",
+      "label": "Tab 3 label",
+      "default": "Unique"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Tab 3 collection"
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "min": 6,
+      "max": 48,
+      "step": 1,
+      "default": 24,
+      "label": "Max products loaded in the strip",
+      "info": "Wider than six scrolls horizontally. View all appears when the collection has more than six products."
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all button label",
+      "default": "View all"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 28,
+      "label": "Padding top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 28,
+      "label": "Padding bottom"
+    }
+  ],
+  "presets": [{ "name": "Home collection tabs" }]
+}
+{% endschema %}
