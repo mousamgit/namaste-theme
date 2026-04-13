@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "title": "Collections",
+        "sort": "alphabetical",
+        "image_ratio": "portrait",
+        "columns_desktop": 3,
+        "columns_mobile": "1"
+      }
+    },
+    "featured_product_6fA7xn": {
+      "type": "featured-product",
+      "blocks": {
+        "text_qjcgYt": {
+          "type": "text",
+          "settings": {
+            "text": "{{ section.settings.product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title_7R9UCT": {
+          "type": "title",
+          "settings": {
+            "heading_size": "h1"
+          }
+        },
+        "price_MhpifM": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker_Ny6MeF": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector_gDGJUQ": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons_rLHyQY": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "share_JQ7mHP": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "text_qjcgYt",
+        "title_7R9UCT",
+        "price_MhpifM",
+        "variant_picker_Ny6MeF",
+        "quantity_selector_gDGJUQ",
+        "buy_buttons_rLHyQY",
+        "share_JQ7mHP"
+      ],
+      "name": "t:sections.featured-product.presets.name",
+      "settings": {
+        "product": "22k-bangles",
+        "color_scheme": "",
+        "secondary_background": false,
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_product_6fA7xn"
+  ]
+}

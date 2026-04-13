@@ -1,0 +1,165 @@
+{% comment %}
+  Custom Footer Dropdown Menu Section
+{% endcomment %}
+
+<style>
+.custom-footer {
+  padding: 40px 20px;
+  background: #f8f8f8;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-item {
+  border-bottom: 1px solid #e5e5e5;
+  padding: 10px 0;
+}
+
+.footer-item a,
+.footer-toggle {
+  font-size: 15px;
+  color: #222;
+  text-decoration: none;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-toggle .arrow {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.footer-submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 15px;
+}
+
+.footer-submenu li {
+  margin: 8px 0;
+}
+
+.footer-submenu a {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Desktop view */
+@media (min-width: 768px) {
+  .footer-menu {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+  }
+
+  .footer-item {
+    border: none;
+  }
+
+  .footer-toggle {
+    cursor: default;
+  }
+
+  .footer-submenu {
+    max-height: none !important;
+    overflow: visible;
+  }
+
+  .footer-toggle .arrow {
+    display: none;
+  }
+}
+</style>
+
+<div class="custom-footer">
+  <div class="footer-container">
+    
+    {% if section.settings.menu != blank %}
+      {% assign footer_menu = linklists[section.settings.menu] %}
+
+      <ul class="footer-menu">
+        {% for link in footer_menu.links %}
+          <li class="footer-item">
+            
+            {% if link.links != blank %}
+              <button class="footer-toggle">
+                {{ link.title }}
+                <span class="arrow">+</span>
+              </button>
+
+              <ul class="footer-submenu">
+                {% for childlink in link.links %}
+                  <li>
+                    <a href="{{ childlink.url }}">{{ childlink.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+
+            {% else %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+            {% endif %}
+
+          </li>
+        {% endfor %}
+      </ul>
+
+    {% else %}
+      <p>Please select a menu in the section settings.</p>
+    {% endif %}
+
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll('.footer-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const submenu = button.nextElementSibling;
+
+      if (submenu.style.maxHeight) {
+        submenu.style.maxHeight = null;
+        button.querySelector('.arrow').textContent = "+";
+        button.querySelector('.arrow').style.transform = "rotate(0deg)";
+      } else {
+        submenu.style.maxHeight = submenu.scrollHeight + "px";
+        button.querySelector('.arrow').textContent = "-";
+        button.querySelector('.arrow').style.transform = "rotate(180deg)";
+      }
+    });
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Footer Dropdown Menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Select Footer Menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Dropdown Menu"
+    }
+  ]
+}
+{% endschema %}
